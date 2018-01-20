@@ -12,11 +12,11 @@ var myDiagram =
 myDiagram.nodeTemplate =
     $(go.Node, "Horizontal",
         {background: "#44CCFF"},
-        $(go.Picture,
-            {margin: 10, width: 50, height: 50, background: "red"},
-            new go.Binding("source")),
+        // $(go.Picture,
+        //     {margin: 10, width: 50, height: 50, background: "red"},
+        //     new go.Binding("source")),
         $(go.TextBlock, "Default Text",
-            {margin: 12, stroke: "white", font: "bold 16px sans-serif"},
+            {margin: 12, width: 300, stroke: "white", font: "bold 16px sans-serif"},
             new go.Binding("text", "name"))
     );
 
@@ -27,3 +27,13 @@ jQuery.getJSON(url, function(data){
     model.nodeDataArray = data;
     myDiagram.model = model;
 });
+
+// jQuery.ajax({
+//     type: 'GET',
+//     url: url,
+//     success: function (data) {
+//         console.log(data);
+//         model.nodeDataArray = data;
+//         myDiagram.model = model;
+//     }
+// });
