@@ -25,14 +25,14 @@
                 {row: 1, alignment: go.Spot.Left},
                 $(go.Shape, "Rectangle",
                     {desiredSize: new go.Size(30, 30), fill: bluegrad, margin: 5}),
-                $(go.TextBlock, "Males",
+                $(go.TextBlock, "Arguments",
                     {font: "700 13px Droid Serif, sans-serif"})
             ),  // end row 1
             $(go.Panel, "Horizontal",
                 {row: 2, alignment: go.Spot.Left},
                 $(go.Shape, "Rectangle",
                     {desiredSize: new go.Size(30, 30), fill: pinkgrad, margin: 5}),
-                $(go.TextBlock, "Females",
+                $(go.TextBlock, "Citations",
                     {font: "700 13px Droid Serif, sans-serif"})
             )  // end row 2
         ));
@@ -61,9 +61,9 @@
         );
 
     // define Converters to be used for Bindings
-    function genderBrushConverter(gender) {
-        if (gender === "M") return bluegrad;
-        if (gender === "F") return pinkgrad;
+    function changeColorAccordingToType(type) {
+        if (type === null) return bluegrad;
+        if (type === "red") return pinkgrad;
         return "orange";
     }
 
@@ -74,12 +74,12 @@
             new go.Binding("text", "name"),
             $(go.Shape, "Rectangle",
                 {
-                    fill: "lightgray",
+                    fill: "lightgreen",
                     stroke: null, strokeWidth: 0,
                     stretch: go.GraphObject.Fill,
                     alignment: go.Spot.Center
                 },
-                new go.Binding("fill", "gender", genderBrushConverter)),
+                new go.Binding("fill", "type", changeColorAccordingToType)),
             $(go.TextBlock,
                 {
                     font: "700 12px Droid Serif, sans-serif",
@@ -116,6 +116,7 @@
 var model = $(go.TreeModel);
 
 var url = "http://localhost:9000/arguments.json";
+// var url = "../arguments.json";
 jQuery.getJSON(url, function (data) {
     model.nodeDataArray = data;
     myDiagram.model = model;
